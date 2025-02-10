@@ -136,7 +136,7 @@ resource "aws_lb_listener" "http" {
   }
 }
 
-
+#DONE IN SECURITY main.tf
 #SECURITY GROUP FOR LOAD BALANCER
 resource "aws_security_group" "load_balancer_sg" {
   name                   = "load_balancer_sg"
