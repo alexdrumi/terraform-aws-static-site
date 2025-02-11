@@ -20,6 +20,13 @@ module "networking" {
     private_subnet_cidrs = var.private_subnet_cidrs
     azs = var.azs  
     vpc_cidr = var.vpc_cidr
+    
+}
+
+#security groups for alb and ec2
+module "security" {
+  source = "./modules/security"
+  vpc_id = module.networking.vpc_id
 }
 
 #call the nat gateway using outputs from networking module
@@ -30,4 +37,13 @@ module "natgateway" {
     private_subnets = module.networking.private_subnets 
     private_subnet_cidrs = var.private_subnet_cidrs 
     internet_gateway_id  = module.networking.internet_gateway_id   
+}
+
+#loadbalancer module
+module "loadbalancer" {
+  source         = "./modules/loadbalancer"
+  vpc_id         = module.networking.vpc_id
+  subnets        = module.networking.public_subnets
+  security_group = module.security.load_balancer_sg_id
+  #desired target group name, etc  here?
 }

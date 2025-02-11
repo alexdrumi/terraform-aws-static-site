@@ -82,6 +82,8 @@ data "aws_ami_ids" "ubuntu" {
   }
 }
 
+
+#DONE IN LOAD BALANCER MAINTF
 #APPLICATION LOAD BALANCER
 resource "aws_lb" "load_balancer" {
   name                       = "application-load-balancer"
@@ -99,6 +101,7 @@ resource "aws_lb" "load_balancer" {
 }
 
 
+#DONE IN LOADBALANCER MODULE
 #TARGET GROUP FOR ALB
 resource "aws_lb_target_group" "lg_target" {
   name     = "lg-target"
@@ -121,6 +124,7 @@ resource "aws_lb_target_group" "lg_target" {
   }
 }
 
+#DONE IN LOADBALANCER MODULE
 resource "aws_lb_listener" "http" {
   load_balancer_arn = aws_lb.load_balancer.arn
   port              = 80
@@ -213,6 +217,7 @@ resource "aws_security_group" "ec2_sg" {
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_configuration
 
 
+#DONE IN COMPUTE MODULE
 #LAUNCH TEMPLATE
 resource "aws_launch_template" "my_launch_template" {
   name          = "my_launch_template"
