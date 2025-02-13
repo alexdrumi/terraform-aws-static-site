@@ -47,3 +47,16 @@ module "loadbalancer" {
   security_group = module.security.load_balancer_sg_id
   #desired target group name, etc  here?
 }
+
+#compoute module
+module "compute" {
+  source              = "./modules/compute"
+  vpc_id              =  module.networking.vpc_id
+  private_subnets     = module.networking.private_subnets
+  ami_id              = var.ami_id
+  instance_type       = var.instance_type
+  key_name            = var.key_name   
+  ec2_security_group  = module.security.ec2_sg_id
+  target_group_arn    = module.loadbalancer.target_group_arn
+ 
+ }

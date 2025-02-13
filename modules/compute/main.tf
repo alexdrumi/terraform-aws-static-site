@@ -23,7 +23,7 @@ resource "aws_launch_template" "my_launch_template" {
   }
 }
 
-
+ 
 resource "aws_autoscaling_group" "static-web-ec2-autoscaling-group" {
   #https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_group.html
   desired_capacity = 3
@@ -39,7 +39,7 @@ resource "aws_autoscaling_group" "static-web-ec2-autoscaling-group" {
     version = "$Latest"
   }
 
-
+ 
   #attach the alb target group directly
   target_group_arns = [var.target_group_arn] #no need for .arn anymore since variables have that
 
@@ -50,8 +50,27 @@ resource "aws_autoscaling_group" "static-web-ec2-autoscaling-group" {
   force_delete              = true
  tag {
     key                 = "Name"
-    value               = "WebServer-ASG"
+    value               = "Webserver-ASG"
     propagate_at_launch = true
   }
   #tags?
+}
+ 
+
+#SCALE UP AND DOWN POLICIES
+resource "aws_autoscaling_policy" "scale_up_policy" {
+  name                   = "scale-up-policy"
+  scaling_adjustment     = 1
+  adjustment_type        = "ChangeInCapacity"
+  cooldown               = 300                                                       #ms?
+  autoscaling_group_name = aws_autoscaling_group.static-web-ec2-autoscaling-group.id #link to the autoscaling group
+}
+
+
+resource "aws_autoscaling_policy" "scale_down_policy" {
+  name                   = "scale-down-policy"
+  scaling_adjustment     = -1
+  adjustment_type        = "ChangeInCapacity"
+  cooldown               = 300                                                       #ms?
+  autoscaling_group_name = aws_autoscaling_group.static-web-ec2-autoscaling-group.id #link to the autoscaling group
 }

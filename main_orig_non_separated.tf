@@ -252,7 +252,7 @@ resource "aws_launch_template" "my_launch_template" {
   }
 }
 
-
+#DONE, COMPUTE MODULE
 #AUTOSCALING GROUP -> must be part of security groups?
 resource "aws_autoscaling_group" "static-web-ec2-autoscaling-group" {
   desired_capacity = 3
@@ -276,7 +276,7 @@ resource "aws_autoscaling_group" "static-web-ec2-autoscaling-group" {
 
 }
 
-
+#DONE, COMPUTE  MODULE
 #SCALE UP AND DOWN POLICIES
 resource "aws_autoscaling_policy" "scale_up_policy" {
   name                   = "scale-up-policy"
