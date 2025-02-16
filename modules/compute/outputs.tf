@@ -13,7 +13,7 @@ output "scale_down_policy" {
   description = "Scale down policy ARN"
   value = aws_autoscaling_policy.scale_down_policy.arn
  
-}
+} 
 
 output "scale_up_policy" {
   description = "Scale up policy ARN"

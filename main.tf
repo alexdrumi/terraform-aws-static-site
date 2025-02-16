@@ -60,3 +60,11 @@ module "compute" {
   target_group_arn    = module.loadbalancer.target_group_arn
  
  }
+
+#cloudfront
+module "cloudfront" {
+  source            = "./modules/cloudfront"
+  load_balancer_id  = module.loadbalancer.alb_dns_id 
+  alb_dns_name      = module.loadbalancer.alb_dns_name
+}
+

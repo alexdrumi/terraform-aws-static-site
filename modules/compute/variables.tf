@@ -33,3 +33,5 @@ variable "target_group_arn" {
   type        = string 
   description = "Target Group ARN for the Auto scaling group."
 }
+
+#autoscaling group name?
