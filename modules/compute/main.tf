@@ -3,7 +3,10 @@ resource "aws_launch_template" "my_launch_template" {
   name          = "my_launch_template"
   description   = "My first launch template for hosting a statis EC2 instance."
   instance_type = var.instance_type
-  image_id      = var.instance_type
+  # image_id      = var.instance_type
+  # image_id      = data.aws_ami_ids.ubuntu.ids[0]
+  image_id = var.ami_id
+
 
 #   key_name               = "MyKeyPair"
     key_name               = var.key_name

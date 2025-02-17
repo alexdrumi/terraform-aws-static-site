@@ -10,7 +10,7 @@ resource "aws_eip" "nat_gateway_eip" {
 resource "aws_nat_gateway" "nat_gateway" {
   count         = length(var.public_subnets)
   allocation_id = aws_eip.nat_gateway_eip[count.index].id
-  subnet_id     = var.public_subnets[count.index].id #chose public subnets to set NAT gateway, this is for EC2 instances outbound traffic, (installing script (ubuntu) for website)
+  subnet_id     = var.public_subnets[count.index] #chose public subnets to set NAT gateway, this is for EC2 instances outbound traffic, (installing script (ubuntu) for website)
   depends_on    = [var.internet_gateway_id]                 #internet gateway needs to be created before NAT
 
   tags = {

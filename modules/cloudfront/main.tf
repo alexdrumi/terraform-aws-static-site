@@ -5,7 +5,9 @@ resource "aws_cloudfront_distribution" "lbs_distribution" {
 
   origin {
     domain_name = var.alb_dns_name #https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb
-    origin_id   = var.alb_dns_id       #?string or can give the id
+    origin_id   = "origin-alb"       #?string or can give the id
+
+    # origin_id   = var.alb_dns_id       #?string or can give the id
     # origin_id   = "alb origin, this can be a string!"       #?string or can give the id
 
     #s3 would have s3_origin_config but this is alb
@@ -21,7 +23,7 @@ resource "aws_cloudfront_distribution" "lbs_distribution" {
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods   = ["GET", "HEAD"] #thats why to use cloudfront
-    target_origin_id = origin_id
+    target_origin_id = "origin-alb" #i couldnt reference this from just a variable
     #do we need viewer policy?
 
     #if we would need dynamic content we would forward the cookies and set query string to true, this is a static site

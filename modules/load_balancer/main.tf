@@ -6,7 +6,7 @@ resource "aws_lb" "load_balancer" {
   enable_deletion_protection = false                                                 #if this is true, AWS prevents the ALB from being destroyed
 
   #depends on the internet gateway
-  depends_on = [aws_internet_gateway.gw] #?
+  # depends_on = [aws_internet_gateway.gw] #?
 
   tags = {
     Name = "application-load-balancer"

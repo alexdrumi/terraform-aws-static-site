@@ -22,10 +22,10 @@ variable "azs" {
   default     = ["eu-north-1a", "eu-north-1b", "eu-north-1c"]
 } 
 
-variable "ami_id" {
-  type        = string 
-  description = "AMI ID for  EC2 instances"   
-}   
+# variable "ami_id" {
+#   type        = string 
+#   description = "AMI ID for  EC2 instances"   
+# }   
 
 
 variable "key_name" {  

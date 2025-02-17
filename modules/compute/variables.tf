@@ -11,6 +11,7 @@ variable "private_subnets" {
 variable "ami_id" { 
   type        = string 
   description = "AMI ID for the EC2instances." 
+  # default = ""#otherwise this will prompt me for the ID
 }
 
 variable "instance_type" {

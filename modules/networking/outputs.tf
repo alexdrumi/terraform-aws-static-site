@@ -22,7 +22,7 @@ output "availability_zones" {
     value = var.azs
 }
 
-output "internet gawatay_id" {
+output "internet_gateway_id" {
     description = "Internet Gateway ID"
     value = aws_internet_gateway.gw.id
 }
