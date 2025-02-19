@@ -1,11 +1,37 @@
 #Launch template for EC2 instances
+#ideally i could pass this from the root but I just couldnt solve it
+data "aws_ami" "ubuntu" {
+  most_recent = true
+  owners      = ["099720109477"]  # Canonical's official Ubuntu owner ID
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "architecture"
+    values = ["x86_64"]  # Ensures it's for AMD64 architecture
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]  # Ensures it's an HVM-based image
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]  # Ensures it's an EBS-backed image
+  }
+}
+
 resource "aws_launch_template" "my_launch_template" {
   name          = "my_launch_template"
   description   = "My first launch template for hosting a statis EC2 instance."
   instance_type = var.instance_type
   # image_id      = var.instance_type
   # image_id      = data.aws_ami_ids.ubuntu.ids[0]
-  image_id = var.ami_id
+  image_id = data.aws_ami.ubuntu.id
 
 
 #   key_name               = "MyKeyPair"

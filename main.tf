@@ -13,13 +13,13 @@ provider "aws" {
 }
 
 #not sure how to set this one into variables
-data "aws_ami_ids" "ubuntu" {
-  owners = ["099720109477"]
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-*-22.04-amd64-server-*"]
-  }
-}
+# data "aws_ami" "ubuntu" {
+#   owners = ["099720109477"]
+#   filter {
+#     name   = "name"
+#     values = ["ubuntu/images/hvm-ssd/ubuntu-*-22.04-amd64-server-*"]
+#   }
+# }
 
 #deploy network related modules (vpc, subnets, igw)
 module "networking" {
@@ -61,7 +61,6 @@ module "compute" {
   source              = "./modules/compute"
   vpc_id              =  module.networking.vpc_id
   private_subnets  = module.networking.private_subnets
-  ami_id              = data.aws_ami_ids.ubuntu.id
   instance_type      = var.instance_type 
   key_name            = var.key_name   
   ec2_security_group  = module.security.ec2_sg_id
