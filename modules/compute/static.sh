@@ -1,19 +1,16 @@
-set -e
-exec > >(tee /var/log/user_data.log | logger -t user-data) 2>&1
+#!/bin/bash
+# set -e
+# exec > >(tee /var/log/user_data.log | logger -t user-data) 2>&1
 
-#always update pcks first on linux
+#always update packages first on linux
 sudo apt-get update -y
 
-#install apache, nginx would also suffice
-sudo apt-get install -y apache2
+#install nginx
+sudo apt-get install -y nginx
 
-#start apache
-sudo systemctl start apache2
-sudo systemctl enable apache2
+sudo systemctl enable nginx
+sudo systemctl start nginx
 
-#a joke of a html
-echo "Hello, World!" > /var/www/html/index.html
+echo "<html>Hello, Nginx!</html>" | sudo tee /var/www/html/index.html
 
-#we will see if this works for health check, had a bug before with nat gateway for being able to download
-echo "healthy" > /var/www/html/health
-
+echo "healthy" | sudo tee /var/www/html/health.html

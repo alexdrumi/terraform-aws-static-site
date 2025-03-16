@@ -30,7 +30,8 @@ variable "azs" {
 
 variable "key_name" {  
  type        = string
-  description = "SSH key-pair name."  
+  description = "SSH key-pair name."
+  default     = "MyKeyPair"
 } 
 
 variable "instance_type" {  

@@ -27,7 +27,7 @@ resource "aws_lb_target_group" "lg_target" {
   #health check here?
   health_check {
     interval            = 30
-    path                = "/health"
+    path                = "/health.html"
     protocol            = "HTTP"
     timeout             = 5
     healthy_threshold   = 2
