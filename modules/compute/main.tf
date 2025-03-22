@@ -25,6 +25,14 @@ data "aws_ami" "ubuntu" {
   }
 }
 
+
+#for automating the keygeneration and storing the pubkeys in the EC2 instances
+resource "aws_key_pair" "default" {
+  key_name = var.key_name
+  public_key = file("MyKeyPair.pem.pub")
+}
+
+
 resource "aws_launch_template" "my_launch_template" {
   name          = "my_launch_template"
   description   = "My first launch template for hosting a statis EC2 instance."
