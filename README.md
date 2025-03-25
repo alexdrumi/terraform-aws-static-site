@@ -1,5 +1,7 @@
 ## Prerequisites
 
+This Terraform project is designed to host a static site using a scalable, highly available architecture built with EC2, ELB, Auto Scaling, CloudFront, NAT Gateways, Application Load Balancers, and Routing Tables. Unlike the usual S3 + CloudFront setup, this solution offers advanced control over networking, security, and routing, making it ideal for both learning and production-grade deployments.
+
 1. **IAM User and Policy:**  
    - Create an IAM user in your AWS account and attach the provided IAM policy (see `iam_policy.json`).
      
