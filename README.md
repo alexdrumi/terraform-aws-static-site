@@ -1,3 +1,17 @@
+# Terraform AWS project
+
+<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+<a id="readme-top"></a>
+
+<br />
+<div align="center">
+  <a href="https://github.com/alexdrumi/terraform-aws-static-site">
+    <img src="assets/aws_terraform.jpg" alt="aws_terraform.jpg" width="550" height="300">
+  </a>
+</div>
+
+<div align="left">
+
 ## Prerequisites
 
 This Terraform project is designed to host a static site using a scalable, highly available architecture built with EC2, ELB, Auto Scaling, CloudFront, NAT Gateways, Application Load Balancers, and Routing Tables. Unlike the usual S3 + CloudFront setup, this solution offers advanced control over networking, security, and routing, making it ideal for both learning and production-grade deployments.
@@ -55,5 +69,5 @@ This Terraform project is designed to host a static site using a scalable, highl
    ├── setup.sh
    └── variables.tf
 
-
+</div>
 
