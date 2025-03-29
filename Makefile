@@ -13,14 +13,16 @@ export_env:
 
 
 #https://stackoverflow.com/questions/19331497/set-environment-variables-from-file-of-key-value-pairs/45971167#45971167
+#. .env runs in the same shell as terraform
 init:
-	@set -a; source .env; set +a; terraform init
+	@. .env && terraform init 
 
   
 #autoapprove gets rid of the enter prompt when running apply; better for CI/CD
-apply:
-	@set -a; source .env; set +a; terraform apply -auto-approve
+apply: export_env
+	@. .env && terraform init
 
 
-destroy:
-	@set -a; source .env; set +a; terraform destroy -auto-approve
+destroy: export_env
+	@. .env && terraform destroy -auto-approve
+
