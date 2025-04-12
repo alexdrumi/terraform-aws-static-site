@@ -1,20 +1,26 @@
 resource "aws_eip" "nat_gateway_eip" {
   domain = "vpc"
-  count  = length(var.public_subnets)
+  # count  = length(var.public_subnets)
   
   tags = {
-    Name = "NAT-gateway-elasticIP ${count.index + 1}"
+    # Name = "NAT-gateway-elasticIP ${count.index + 1}"
+    Name = "NAT-gateway-elasticIP"
+
   }
 }
 
 resource "aws_nat_gateway" "nat_gateway" {
-  count         = length(var.public_subnets)
-  allocation_id = aws_eip.nat_gateway_eip[count.index].id
-  subnet_id     = var.public_subnets[count.index] #chose public subnets to set NAT gateway, this is for EC2 instances outbound traffic, (installing script (ubuntu) for website)
+  # count         = length(var.public_subnets)
+  allocation_id = aws_eip.nat_gateway_eip.id #we want 1 natgateway
+  # allocation_id = aws_eip.nat_gateway_eip[count.index].id
+  # subnet_id     = var.public_subnets[count.index] #chose public subnets to set NAT gateway, this is for EC2 instances outbound traffic, (installing script (ubuntu) for website)
+  subnet_id     = var.public_subnets[0] #Use first pub subnet. Better with 1 NAT gateway, costs 30 bucks per month
   depends_on    = [var.internet_gateway_id]                 #internet gateway needs to be created before NAT
 
   tags = {
-    Name = "NAT-gateway ${count.index + 1}"
+    # Name = "NAT-gateway ${count.index + 1}"
+      Name = "NAT-gateway"
+
   }
 }
 
@@ -23,8 +29,10 @@ resource "aws_route_table" "private_route_table" {
   count  = length(var.private_subnet_cidrs)
 
   route {
-    cidr_block     = "0.0.0.0/0"                                 #all ipv4
-    nat_gateway_id = aws_nat_gateway.nat_gateway[count.index].id #outbound internet traffic from private subnets to NAT
+    cidr_block     = "0.0.0.0/0"                                #all ipv4
+    nat_gateway_id = aws_nat_gateway.nat_gateway.id #reference single NAT gateway
+
+    # nat_gateway_id = aws_nat_gateway.nat_gateway[count.index].id #outbound internet traffic from private subnets to NAT
   }
 
   tags = {
