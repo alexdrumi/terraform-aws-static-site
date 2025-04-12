@@ -45,18 +45,22 @@ This Terraform project is designed to host a static site using a scalable, highl
 
    - [AWS Key Pair Documentation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-key-pairs.html)
 
+5. **Clone repository and enter the root directory:**  
+   ```bash
+   git clone git@github.com:alexdrumi/terraform-aws-static-site.git
+   cd terraform-aws-static-site
 
-5. **Initialize the SSH Key Pair:**  
+6. **Initialize the SSH Key Pair:**  
    Run the following command to generate the key pair (if not already present):
    ```bash
    make key-gen
 
-6. **Terraform setup:**
+7. **Terraform setup:**
    ```bash
    make init
    make apply
 
-7. **Example folder structure after running points 4&5:**
+8. **Example root folder structure after running previous commands:**
    ```bash
    ├── Makefile
    ├── MyKeyPair.pem
@@ -68,6 +72,7 @@ This Terraform project is designed to host a static site using a scalable, highl
    ├── outputs.tf
    ├── setup.sh
    └── variables.tf
+   └── .env
 
 </div>
 
