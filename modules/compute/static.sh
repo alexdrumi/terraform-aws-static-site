@@ -11,6 +11,6 @@ sudo apt-get install -y nginx
 sudo systemctl enable nginx
 sudo systemctl start nginx
 
-echo "<html>Hello, Nginx!</html>" | sudo tee /var/www/html/index.html
+echo "<html>Hello, Nginx! We are live from the static website! </html>" | sudo tee /var/www/html/index.html
 
 echo "healthy" | sudo tee /var/www/html/health.html
