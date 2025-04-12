@@ -45,6 +45,7 @@ This Terraform project is designed to host a static site using a scalable, highl
 
    - [AWS Key Pair Documentation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-key-pairs.html)
 
+## Usage
 5. **Clone repository and enter the root directory:**  
    ```bash
    git clone git@github.com:alexdrumi/terraform-aws-static-site.git
