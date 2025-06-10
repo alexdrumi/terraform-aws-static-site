@@ -12,15 +12,6 @@ provider "aws" {
   region = "eu-north-1"
 }
 
-#not sure how to set this one into variables
-# data "aws_ami" "ubuntu" {
-#   owners = ["099720109477"]
-#   filter {
-#     name   = "name"
-#     values = ["ubuntu/images/hvm-ssd/ubuntu-*-22.04-amd64-server-*"]
-#   }
-# }
-
 #deploy network related modules (vpc, subnets, igw)
 module "networking" {
     source = "./modules/networking"
@@ -39,7 +30,7 @@ module "security" {
 
 #call the nat gateway using outputs from networking module
 module "natgateway" {
-    source = "./modules/nat_gateway" #why does this work without _ when the module name has _?
+    source = "./modules/nat_gateway"
     vpc_id = module.networking.vpc_id 
     public_subnets = module.networking.public_subnets  
     private_subnets = module.networking.private_subnets 
@@ -53,7 +44,6 @@ module "loadbalancer" {
   vpc_id         = module.networking.vpc_id
   subnets        = module.networking.public_subnets
   security_group = module.security.load_balancer_sg_id
-  #desired target group name, etc  here?
 }
 
 #compoute module
@@ -71,7 +61,7 @@ module "compute" {
 #cloudfront
 module "cloudfront" {
   source            = "./modules/cloudfront"
-  alb_dns_id = module.loadbalancer.alb_dns_id #problem 2?
+  alb_dns_id = module.loadbalancer.alb_dns_id 
   alb_dns_name   = module.loadbalancer.alb_dns_name
 }
 

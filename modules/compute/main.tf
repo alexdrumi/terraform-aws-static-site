@@ -2,7 +2,7 @@
 #ideally i could pass this from the root but I just couldnt solve it
 data "aws_ami" "ubuntu" {
   most_recent = true
-  owners      = ["099720109477"]  # Canonical's official Ubuntu owner ID
+  owners      = ["099720109477"]  #canonical ubuntu owner ID
 
   filter {
     name   = "name"
@@ -11,17 +11,17 @@ data "aws_ami" "ubuntu" {
 
   filter {
     name   = "architecture"
-    values = ["x86_64"]  # Ensures it's for AMD64 architecture
+    values = ["x86_64"]  #**64 architecture
   }
 
   filter {
     name   = "virtualization-type"
-    values = ["hvm"]  # Ensures it's an HVM-based image
+    values = ["hvm"]  #hvm-based image
   }
 
   filter {
     name   = "root-device-type"
-    values = ["ebs"]  # Ensures it's an EBS-backed image
+    values = ["ebs"]  #ebs backend image
   }
 }
 
@@ -99,7 +99,7 @@ resource "aws_autoscaling_policy" "scale_up_policy" {
   name                   = "scale-up-policy"
   scaling_adjustment     = 1
   adjustment_type        = "ChangeInCapacity"
-  cooldown               = 300                                                       #ms?
+  cooldown               = 300                         #ms?
   autoscaling_group_name = aws_autoscaling_group.static-web-ec2-autoscaling-group.id #link to the autoscaling group
 }
 
@@ -108,6 +108,6 @@ resource "aws_autoscaling_policy" "scale_down_policy" {
   name                   = "scale-down-policy"
   scaling_adjustment     = -1
   adjustment_type        = "ChangeInCapacity"
-  cooldown               = 300                                                       #ms?
+  cooldown               = 300                                  #ms?
   autoscaling_group_name = aws_autoscaling_group.static-web-ec2-autoscaling-group.id #link to the autoscaling group
 }

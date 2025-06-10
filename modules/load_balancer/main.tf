@@ -27,12 +27,12 @@ resource "aws_lb_target_group" "lg_target" {
   #health check here?
   health_check {
     interval            = 30
-    path                = "/health.html"
-    protocol            = "HTTP"
-    timeout             = 5
+    path             = "/health.html"
+    protocol          = "HTTP"
+    timeout            = 5
     healthy_threshold   = 2
     unhealthy_threshold = 2
-    matcher             = "200-299"
+    matcher            = "200-299"
   }
 }
 

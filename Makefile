@@ -1,4 +1,4 @@
-# # Generate SSH key pair if not present
+#generate keypair if not present
 key-gen:
 	@if [ ! -f MyKeyPair.pem ]; then \
 		echo "Generating SSH key pair..."; \

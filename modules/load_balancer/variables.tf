@@ -4,17 +4,17 @@ variable "vpc_id" {
 }
 
 variable "subnets" {
-  type        = list(string)
+  type       = list(string)
   description = "Public subnet IDs for the load balancer."
 }
 
 variable "security_group" { 
-  type        = string  
+  type      = string  
   description = "Security group ID for the load balancer of the security group module."
 }
 
 variable "alb_name" { 
-  type        = string  
+  type      = string  
   description = "Name for the Applicatio n load balancer"
   default     = "application-load-balancer"
 }

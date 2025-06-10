@@ -55,3 +55,4 @@ resource "aws_cloudfront_distribution" "lbs_distribution" {
     Name = "cloudfront distribution to application load balancer"
   }
 }
+
